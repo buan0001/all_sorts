@@ -1,0 +1,10 @@
+.data_grid {
+  display: grid;
+  grid-template-columns: repeat(40, 1fr);
+}
+
+.pillar {
+  background-color: green;
+  border: 2px black solid;
+  margin: 0.5em;
+}

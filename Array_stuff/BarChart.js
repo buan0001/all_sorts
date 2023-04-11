@@ -1,26 +1,38 @@
-"use strict"
-window.addEventListener("load",start)
+"use strict";
+window.addEventListener("load", start);
 
-const liste = []
+const liste = [];
 
 function start(params) {
-    firstCustomers()
-    // setInterval(generateCustomers, 1000)
+  firstCustomers();
+  for (let i = 0; i < 40; i++) {
+    setHeight(liste[i]);
+  }
+  setInterval(generateCustomers, 1000);
 }
 
 function firstCustomers() {
-    for (let i = 0; i < 4; i++) {
-    //   console.log(`værdi:#${i} er ${myArr[i]}`);
-      let tal = Math.floor(Math.random() * 32)
-      liste.push(tal)
-      console.log(liste)
-    }
+  for (let i = 0; i < 40; i++) {
+    let tal = Math.floor(Math.random() * 32);
+    liste.push(tal);
+  }
 }
 
+function setHeight(number) {
+  const data = /*html*/ `<article id="pillar" class="pillar" style="height:${number * 15}px"></article>`;
+  document.querySelector("#grid_container").insertAdjacentHTML("beforeend", data);
+}
 
 function generateCustomers(params) {
-    let tal = Math.floor(Math.random() * 32);
-    console.log(tal)
-    return tal
+  let tal = Math.floor(Math.random() * 32);
+  console.log(tal);
+  updateCustomers(tal);
 }
 
+function updateCustomers(tal) {
+  liste.push(tal);
+  liste.shift();
+
+  document.querySelectorAll(".pillar").forEach((thingy) => thingy.remove());
+  liste.forEach(setHeight);
+}
